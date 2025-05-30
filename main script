@@ -1,0 +1,55 @@
+import random
+from tkinter import *
+
+sentece = ["Life is extremely wierd", "Curiosity killed the cat", "The orchestra played well", "Clara hates Voldemor", "I hate it when Voldemor eats my nutella", "never gonna give you up"]
+time = 60
+points = 0
+
+screen = Tk()
+screen.geometry('700x350')
+screen.title('ColorGame')
+
+def startgame(event):
+    nextsentece()
+    if time == 60:
+        countdown()
+
+def nextsentece():
+    global points
+    if time > 0:
+        if e.get() == sentece[1]:
+                points += 1
+    score.configure(text="Score: " +str(points))
+    e.delete(0, END)
+    random.shuffle(sentece)
+    txt.configure(text=sentece[1])
+
+
+def countdown():
+    global time
+    if time > 0:
+        time -= 1
+        print(time)
+        timer.configure(text = "Time Left: " +str(time))
+        timer.after(1000,countdown)
+
+
+lbl = Label(screen, text = "Type the sentece that you see")
+score = Label(screen, text = "Press Enter to begin")
+timer = Label(screen, text = "Time Left: ")
+txt = Label(screen, text ="hi", font = ('Comic Sans MS', 15))
+
+e = Entry(screen)
+
+lbl.pack()
+score.pack()
+timer.pack()
+txt.pack()
+
+e.pack()
+
+e.focus_set()
+screen.bind('<Return>', startgame) # using enter to do something
+
+
+screen.mainloop()
